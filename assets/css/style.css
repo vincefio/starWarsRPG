@@ -1,0 +1,11 @@
+.initial-characters{
+  width: 175px;
+  height: 175px;
+  border: 2px solid green;
+  float: left;
+}
+
+.characterImage{
+  width: 75px;
+  height: 75px;
+}
