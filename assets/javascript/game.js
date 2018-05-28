@@ -1,6 +1,7 @@
 $(document).ready(function(){
   //define 3 character objects to start
-  let characters = {
+let game = {
+  characters: {
     char1: {
       name: "Obi-Wan-Kenobi",
       picture: "./assets/images/obi-wan.jpg",
@@ -20,25 +21,30 @@ $(document).ready(function(){
       name: "Darth Maul",
       picture: "./assets/images/darthMaul.jpg",
       hp: 240
-    },
-  }
+    }
+  },
+    displayCharacters: function(){
+        //loop through characters object
+      for(let property in this.characters){
+        //console.log('character name ' + characters[property].name)
+        let i = $('<div class="initial-characters">')
+        $('#characterOptions').append(i)
 
-  //loop through characters object
-for(let property in characters){
-  //console.log('character name ' + characters[property].name)
-  let i = $('<div class="initial-characters">')
-  //i.attr('data-let', property)
-//  i.text(characters[property].name)
-  $('#characterOptions').append(i)
-  let name = $('<p>' + characters[property].name + '</p>')
-  i.append(name)
+        let name = $('<p>' + this.characters[property].name + '</p>')
+        i.append(name)
 
-  let picture = $('<img class="characterImage">')
-  picture.attr('src', characters[property].picture)
-  i.append(picture)
+        let picture = $('<img class="characterImage">')
+        picture.attr('src', this.characters[property].picture)
+        i.append(picture)
 
-  let hp = $('<p>' + characters[property].hp + '</p>')
-  i.append(hp)
+        let hp = $('<p>' + this.characters[property].hp + '</p>')
+        i.append(hp)
+      }
+    }
+
 }
+
+
+  game.displayCharacters()
 
 })
