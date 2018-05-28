@@ -1,26 +1,41 @@
 $(document).ready(function(){
   //define 3 character objects to start
+  let defenderData;
+  let defenderAttack;
+  let defenderHP
+  let mainCharData
+  let mainAttack
+  let mainHP
+  let newMain
+  let newDefend
+  let newMainAttack
+
 let game = {
+
   characters: {
     char1: {
       name: "Obi-Wan-Kenobi",
       picture: "./assets/images/obi-wan.jpg",
-      hp: 150
+      hp: 150,
+      attack: 50
     },
     char2: {
       name: "Luke SkyWalker",
       picture: "./assets/images/luke.jpg",
-      hp: 200
+      hp: 200,
+      attack: 35
     },
     char3: {
       name: "Darth Sidious",
       picture: "./assets/images/darthSidious.jpg",
-      hp: 220
+      hp: 220,
+      attack: 25
     },
     char4: {
       name: "Darth Maul",
       picture: "./assets/images/darthMaul.jpg",
-      hp: 240
+      hp: 240,
+      attack: 15
     }
   },
     displayCharacters: function(){
@@ -38,7 +53,7 @@ let game = {
         picture.attr('src', this.characters[property].picture)
         i.append(picture)
 
-        let hp = $('<p id="health">' + this.characters[property].hp + '</p>')
+        let hp = $('<p class="health">' + this.characters[property].hp + '</p>')
         i.append(hp)
       }
 
@@ -81,16 +96,47 @@ let game = {
 
     },
     firstEnemy: function(){
-      //loop through characters searching for mainCharacter attr and populate accordingly
-    /*  $('.possibleEnemy').on("click", function(){
-        console.log('click event works on first enemy')
-      /*  $('.initial-characters').each(function(){
-          if($(this).data('char') == 'possibleEnemy'){
-            console.log('click event works on possible enemy')
-            $(this).addClass('enemy')
-          }
-        })
+    //console.log(mainAttack)
+      defenderData = $('#defender').attr("data-char")
+      defenderAttack = this.characters[defenderData].attack
+      defenderHP = this.characters[defenderData].hp
+
+      //console.log(defenderData)
+      mainCharData = $('#mainCharacter').attr("data-char")
+      mainAttack = this.characters[mainCharData].attack
+      mainHP = this.characters[mainCharData].hp
+      //console.log(mainCharData)
+
+      //$('#fightScore').append(i).append(j)
+      //console.log('new main char hp = ' + (mainHP - defenderAttack))
+      //mainHP = (mainHP - defenderAttack)
+      console.log(mainAttack)
+
+      this.characters[mainCharData].hp  = this.characters[mainCharData].hp - defenderAttack
+      this.characters[defenderData].hp  = this.characters[defenderData].hp - mainAttack
+    //  console.log('new main  HP is ' + mainHP)
+    console.log('character objec attack is ' +this.characters[mainCharData].attack)
+//newDefend = (defenderHP - mainAttack)
+    //  mainAttack = mainAttack + mainAttack
+
+      let i = $('<p>')
+      i.html('Youve attacked with '+  this.characters[mainCharData].attack + '<br></br>')
+      let j = $('<p>')
+      j.html('Youve been hit with '+ this.characters[defenderData].attack)
+
+      $('#fightScore').html(i).append(j)
+
+      $('#mainCharacter>p.health').html(this.characters[mainCharData].hp)
+      $('#defender>p.health').html(this.characters[defenderData].hp)
+    //  this.displayDamage()
+    this.characters[mainCharData].attack = this.characters[mainCharData].attack + mainAttack
+    },
+    displayDamage: function(){
+      //console.log('display damage working')
+    /*  $('#mainCharacter').on('click', function(){
+        console.log('main button working')
       })*/
+      console.log()
 
     }
 }
@@ -100,8 +146,9 @@ let game = {
   game.pickMainCharacter()
 
   $('#button').on('click', function(){
-    console.log('button ')
+    //console.log('button clicked')
+    game.firstEnemy()
+    //we need to find link the defender and main char w their objects
   })
-  //game.firstEnemy()
 
 })
