@@ -10,6 +10,9 @@ $(document).ready(function(){
   let newDefend
   let newMainAttack
 
+  let i = $('<p>')
+  let j = $('<p>')
+
 let game = {
 
   characters: {
@@ -22,7 +25,7 @@ let game = {
     char2: {
       name: "Luke SkyWalker",
       picture: "./assets/images/luke.jpg",
-      hp: 65,
+      hp: 75,
       attack: 12
     },
     char3: {
@@ -87,6 +90,7 @@ let game = {
         $(this).attr('id','defender')
 
         $('#defenderBox').append($(this))
+
       })
 
       /*$('.defender').on('click', function(){
@@ -96,6 +100,7 @@ let game = {
 
     },
     firstEnemy: function(){
+
     //console.log(mainAttack)
       defenderData = $('#defender').attr("data-char")
       defenderAttack = this.characters[defenderData].attack
@@ -119,9 +124,9 @@ let game = {
 //newDefend = (defenderHP - mainAttack)
     //  mainAttack = mainAttack + mainAttack
 
-      let i = $('<p>')
+
       i.html('Youve attacked with '+  this.characters[mainCharData].attack + '<br></br>')
-      let j = $('<p>')
+
       j.html('Youve been hit with '+ this.characters[defenderData].attack)
 
       $('#fightScore').html(i).append(j)
@@ -129,7 +134,7 @@ let game = {
       $('#mainCharacter>p.health').html(this.characters[mainCharData].hp)
       $('#defender>p.health').html(this.characters[defenderData].hp)
     //  this.displayDamage()
-    this.characters[mainCharData].attack = this.characters[mainCharData].attack + mainAttack
+    this.characters[mainCharData].attack = this.characters[mainCharData].attack + (mainAttack/2)
 
     this.endCheck()
     },
@@ -138,12 +143,26 @@ let game = {
     /*  $('#mainCharacter').on('click', function(){
         console.log('main button working')
       })*/
-      if(this.characters[mainCharData].hp < 1){
-        alert('you lose')
-      }else if (this.characters[defenderData].hp < 1){
+    if (this.characters[defenderData].hp < 1){
         alert('you win')
         $('#defender').remove()
-      }
+        $('#fightScore').html('Youve defeated ' + this.characters[defenderData].name + '<br></br>')
+        $('#fightScore').append('Select another opponent if youd like')
+
+        //check to see if there are any more opponents
+        if($('#possibleEnemies').children().length == 1){
+          $('#fightScore').html('no more enemies to fight. GAME OVER')
+          let b = $('<button type="submit" id="reloadButton">')
+          b.html('Restart')
+          $('#fightScore').append('<br></br>').append(b)
+        }
+      }else if(this.characters[mainCharData].hp < 1){
+          alert('You Lose')
+          $('#fightScore').html('you lose. GAME OVER')
+          let b = $('<button type="submit" id="reloadButton" onClick="location.href=location.href">')
+          b.html('Restart')
+          $('#fightScore').append('<br></br>').append(b)
+        }
 
     }
 }
@@ -156,6 +175,11 @@ let game = {
     //console.log('button clicked')
     game.firstEnemy()
     //we need to find link the defender and main char w their objects
+  })
+
+  $('#reloadButton').on('click', function(){
+    console.log('reload button clicked')
+    location.href=location.href
   })
 
 })
