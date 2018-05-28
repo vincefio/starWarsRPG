@@ -28,7 +28,7 @@ let game = {
       for(let property in this.characters){
         //console.log('character name ' + characters[property].name)
         let i = $('<div class="initial-characters">')
-        i.attr('data-char', 'original')
+        i.attr('data-char', property)
         $('#characterOptions').append(i)
 
         let name = $('<p>' + this.characters[property].name + '</p>')
@@ -42,42 +42,66 @@ let game = {
         i.append(hp)
       }
 
-      this.pickMainCharacter()
+    //  this.pickMainCharacter()
     },
     pickMainCharacter: function(){
       //onClick function that will utilize this keyword to change data attr
       $('.initial-characters').on("click", function(){
-        //if($(this).data('char') == 'original'){
-        $(this).attr('data-char', 'mainCharacter')
-        //console.log($(this))
-        //$('#yourCharacter').append($(this))
-        //loop that is going to check for data attributes
-        $('.initial-characters').each(function(){
-          //counter++
-          //console.log('loop works')
-          if($(this).data('char') == 'mainCharacter'){
-            //console.log('main character ' + $(this).html())
-            $('#yourCharacter').append($(this))
-          }else if($(this).data('char') == 'original'){
-            $('#possibleEnemies').append($(this))
-            $(this).attr('data-char', 'possibleEnemy')
+        console.log('initial character clicked')
+      //  if($(this).hasClass('initial-characters')){
+          //  $(this).attr('data-char', 'mainCharacter')
+          $(this).removeClass('initial-characters')
+          $(this).addClass('mainCharacter')
+          //$(this).attr('data-char', 'main')
+          $('#yourCharacter').append($(this))
+
+            //loop that is going to check for class
+            $('.initial-characters').each(function(){
+
+              $(this).removeClass('initial-characters')
+              $(this).addClass('possibleEnemy')
+              $('#possibleEnemies').append($(this))
+            })
+      //  }
+      //  this.firstEnemy()
+      $('.possibleEnemy').on('click', function(){
+      //  $(this).attr('data-char', 'defender')
+        console.log('possible enemy clicked')
+
+        $(this).removeClass('possibleEnemy mainCharacter')
+        $(this).addClass('defender')
+
+        $('#defenderBox').append($(this))
+      })
+
+      /*$('.defender').on('click', function(){
+        console.log('defender clicked')
+      })*/
+      })
+
+    },
+    firstEnemy: function(){
+      //loop through characters searching for mainCharacter attr and populate accordingly
+    /*  $('.possibleEnemy').on("click", function(){
+        console.log('click event works on first enemy')
+      /*  $('.initial-characters').each(function(){
+          if($(this).data('char') == 'possibleEnemy'){
+            console.log('click event works on possible enemy')
+            $(this).addClass('enemy')
           }
         })
-    //  }
-      })
-    //  this.firstCharacterChange()
-    },
-    /*firstCharacterChange: function(){
-      //loop through characters searching for mainCharacter attr and populate accordingly
-      let childCounter = 0
-      for(let i = 0; i < characterOptions.attributes.length; i++){
-        childCounter++
-      }
-      console.log(childCounter)
-    }*/
+      })*/
+
+    }
 }
 
 
   game.displayCharacters()
-  //game.pickMainCharacter()
+  game.pickMainCharacter()
+
+  $('#button').on('click', function(){
+    console.log('button ')
+  })
+  //game.firstEnemy()
+
 })

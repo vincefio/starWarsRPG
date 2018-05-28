@@ -1,6 +1,6 @@
-.initial-characters{
-  width: 175px;
-  height: 175px;
+.initial-characters, .possibleEnemy, .mainCharacter, .defender, #mainCharacter, #defender{
+  width: 115px;
+  height: 115px;
   border: 2px solid green;
   float: left;
 }
@@ -14,4 +14,12 @@
     content: "";
     clear: both;
     display: table;
+}
+
+p{
+  margin: 0;
+}
+
+h1,h2 {
+  margin: 5px;
 }
