@@ -38,7 +38,7 @@ let game = {
         picture.attr('src', this.characters[property].picture)
         i.append(picture)
 
-        let hp = $('<p>' + this.characters[property].hp + '</p>')
+        let hp = $('<p id="health">' + this.characters[property].hp + '</p>')
         i.append(hp)
       }
 
@@ -51,7 +51,7 @@ let game = {
       //  if($(this).hasClass('initial-characters')){
           //  $(this).attr('data-char', 'mainCharacter')
           $(this).removeClass('initial-characters')
-          $(this).addClass('mainCharacter')
+          $(this).attr('id','mainCharacter')
           //$(this).attr('data-char', 'main')
           $('#yourCharacter').append($(this))
 
@@ -69,7 +69,7 @@ let game = {
         console.log('possible enemy clicked')
 
         $(this).removeClass('possibleEnemy mainCharacter')
-        $(this).addClass('defender')
+        $(this).attr('id','defender')
 
         $('#defenderBox').append($(this))
       })
