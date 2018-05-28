@@ -16,26 +16,26 @@ let game = {
     char1: {
       name: "Obi-Wan-Kenobi",
       picture: "./assets/images/obi-wan.jpg",
-      hp: 150,
-      attack: 50
+      hp: 50,
+      attack: 14
     },
     char2: {
       name: "Luke SkyWalker",
       picture: "./assets/images/luke.jpg",
-      hp: 200,
-      attack: 35
+      hp: 65,
+      attack: 12
     },
     char3: {
       name: "Darth Sidious",
       picture: "./assets/images/darthSidious.jpg",
-      hp: 220,
-      attack: 25
+      hp: 80,
+      attack: 10
     },
     char4: {
       name: "Darth Maul",
       picture: "./assets/images/darthMaul.jpg",
-      hp: 240,
-      attack: 15
+      hp: 95,
+      attack: 8
     }
   },
     displayCharacters: function(){
@@ -130,13 +130,20 @@ let game = {
       $('#defender>p.health').html(this.characters[defenderData].hp)
     //  this.displayDamage()
     this.characters[mainCharData].attack = this.characters[mainCharData].attack + mainAttack
+
+    this.endCheck()
     },
-    displayDamage: function(){
+    endCheck: function(){
       //console.log('display damage working')
     /*  $('#mainCharacter').on('click', function(){
         console.log('main button working')
       })*/
-      console.log()
+      if(this.characters[mainCharData].hp < 1){
+        alert('you lose')
+      }else if (this.characters[defenderData].hp < 1){
+        alert('you win')
+        $('#defender').remove()
+      }
 
     }
 }
